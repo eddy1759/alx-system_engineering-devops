@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
 #Install Nginx and the int file have only a message
 sudo apt update -y
-sudo apt upgrade -y
 sudo apt install nginx -y
-ufw allow 'Nginx HTTP'
-echo "Hello World!" >  /var/www/html/index.nginx-debian.html
-service nginx start
-
+sudo service nginx start
+echo "Hello World!" | sudo tee /var/www/html/index.html
+sudo sed -i 's/listen 80 default_server/listen 80/g' /etc/nginx/sites-available/default
+sudo service nginx restart
